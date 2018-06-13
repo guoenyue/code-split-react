@@ -5,6 +5,7 @@ export default class Bundle extends Component {
     }
     componentWillMount() {
         this.load(this.props)
+        console.log(this.props);
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.load !== this.props.load) {
@@ -24,6 +25,6 @@ export default class Bundle extends Component {
     render() {
         //return this.props.children(this.state.mod)
         const Tmpl=this.state.mod;
-        return Tmpl&&(<Tmpl></Tmpl>);
+        return typeof this.props.children=='function'&&this.props.children(this.state.mod)||Tmpl&&(<Tmpl {...this.props}></Tmpl>);
     }
 }

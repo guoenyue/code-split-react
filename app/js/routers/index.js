@@ -6,13 +6,15 @@ import List from "bundle-loader?lazy!../container/list";
 import Detail from "bundle-loader?lazy!../container/detail";
 import App from "bundle-loader?lazy!../container/app";
 
+const LazyLoadComponent=(component)=>{return props=>(<Bundle {...props} load={component}></Bundle>)};
+
 const Routers=()=>(
     <HashRouter>
         <Switch>
-            <Route path="/home" component={()=>(<Bundle load={Home}></Bundle>)}></Route>
-            <Route path="/list" component={()=>(<Bundle load={List}></Bundle>)}></Route>
-            <Route path="/detail" component={()=>(<Bundle load={Detail}></Bundle>)}></Route>
-            <Route exact={true} path='/' component={()=>(<Bundle load={App}></Bundle>)}></Route>
+            <Route path="/home" component={LazyLoadComponent(Home)}></Route>
+            <Route path="/list" component={LazyLoadComponent(List)}></Route>
+            <Route path="/detail" component={LazyLoadComponent(Detail)}></Route>
+            <Route exact={true} path='/' component={LazyLoadComponent(App)}></Route>
         </Switch>
     </HashRouter>
 );
